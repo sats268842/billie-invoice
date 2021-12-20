@@ -1,0 +1,23 @@
+@function get-color($color-name) {
+  @return map-get($colors, 'primary', $color-name);
+}
+
+@function get-color-secondary($color-name) {
+  @return map-get($colors, 'secondary', $color-name);
+}
+
+@function get-font-size($font-size) {
+  @return map-get($text-styles, 'sizes', $font-size);
+}
+
+@function get-font-size($font-size) {
+  @return map-get($text-styles, 'sizes', $font-size);
+}
+
+@function get-font-family($font-family) {
+  @return map-get($text-styles, 'fonts', $font-family);
+}
+
+@function get-font-weight($font-weight) {
+  @return map-get($text-styles, 'font-weights', $font-weight);
+}

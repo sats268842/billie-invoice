@@ -1,0 +1,33 @@
+<div
+  [ngClass]="{ sticky: isSticky, 'navbar-mob': toggle }"
+  [ngStyle]="{ 'flex-direction': toggle ? 'column' : 'row' }"
+  class="w-full z-50 transition-all ease-in-out duration-500 bg-transparent fixed items-center"
+>
+  <div class="text-blueGray-700 rounded-lg">
+    <div
+      [ngClass]="isSticky ? 'md:px-10 px-4 p-2' : 'md:px-10 px-4 p-5'"
+      class="flex flex-row justify-between mx-auto md:items-center md:flex-row"
+    >
+      <a [routerLink]="['..']" class="pr-2 lg:pr-8 lg:px-6 focus:outline-none">
+        <div class="inline-flex items-center">
+          <div class="w-2 h-2 p-2 mr-2 rounded-full bg-gradient-to-tr from-blue-500 to-blue-600"></div>
+          <h2 [ngClass]="isSticky ? 'text-primary' : 'text-primary'" class="font-bold text-2xl md:text-4xl">Billie</h2>
+        </div>
+      </a>
+      <!-- <nav class="flex flex-wrap items-center justify-center text-base lg:mr-auto">
+          
+      </nav> -->
+      <a
+        href="https://www.producthunt.com/posts/billie-invoice-generator?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-billie-invoice-generator"
+        target="_blank"
+        rel="noopener"
+        ><img
+          src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=312346&theme=light"
+          alt="Billie Free Invoice Generator - Best Way to Generate Invoice | Product Hunt"
+          style="width: 150px; height: 32px"
+          width="150"
+          height="42"
+      /></a>
+    </div>
+  </div>
+</div>

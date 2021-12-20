@@ -1,0 +1,100 @@
+<div class="flex relative flex-wrap h-full overflow-y-auto">
+  <div class="w-full relative object-contain h-2.5/6 object-bottom overflow-hidden rounded-b-3xl">
+    <ion-icon
+      (click)="onClose()"
+      class="absolute left-5 top-7 text-xl z-50 text-white"
+      name="arrow-back-outline"
+    ></ion-icon>
+    <img src="../../../../assets/icons/ToyFaces_Colored_BG_29.jpg" alt="" srcset="" />
+  </div>
+
+  <div class="w-full h-3.5/6 relative px-6 py-10">
+    <div
+      class="
+        flex flex-row
+        bg-white
+        gap-4
+        mx-6
+        shadow-sm
+        rounded
+        px-3
+        py-3
+        left-0
+        right-0
+        justify-around
+        -mt-20
+        absolute
+      "
+    >
+      <div class="">
+        <h2 class="font-semibold">200</h2>
+        <p class="text-secondary-text text-xxs">Invoices</p>
+      </div>
+
+      <div class="">
+        <h2 class="font-semibold">20000</h2>
+        <p class="text-secondary-text text-xxs">Income</p>
+      </div>
+
+      <div class="">
+        <h2 class="font-semibold">200</h2>
+        <p class="text-secondary-text text-xxs">Invoices</p>
+      </div>
+    </div>
+
+    <div>
+      <h1 class="text-2xl font-semibold">
+        {{ customer?.name }}
+      </h1>
+      <p class="text-secondary-text text-xxs">
+        {{ customer?.email }}
+      </p>
+    </div>
+    <!-- Column Content -->
+    <div class="flex flex-wrap overflow-hidden xl:-mx-2 mt-8">
+      <div class="w-1/3 my-2 px-1 overflow-hidden xl:my-2 xl:px-2 xl:w-1/3">
+        <h4 class="font-semibold text-tiny">
+          {{ customer?.customerType }}
+        </h4>
+        <p class="text-xxs text-secondary-text font-normal">Customer Type</p>
+      </div>
+
+      <div class="w-1/3 my-2 px-1 overflow-hidden xl:my-2 xl:px-2 xl:w-1/3">
+        <h4 class="font-semibold text-tiny">
+          {{ customer?.taxType }}
+        </h4>
+        <p class="text-xxs text-secondary-text font-normal">Tax Type</p>
+      </div>
+
+      <div class="w-1/3 my-2 px-1 overflow-hidden xl:my-2 xl:px-2 xl:w-1/3">
+        <h4 class="font-semibold text-tiny">
+          {{ customer?.taxID }}
+        </h4>
+        <p class="text-xxs text-secondary-text font-normal">Tax ID</p>
+      </div>
+
+      <div class="w-1/3 my-2 px-1 overflow-hidden xl:my-2 xl:px-2 xl:w-1/3">
+        <h4 class="font-semibold text-tiny">
+          {{ customer?.contactNo }}
+        </h4>
+        <p class="text-xxs text-secondary-text font-normal">Contact No</p>
+      </div>
+
+      <div class="w-1/3 my-2 px-1 overflow-hidden xl:my-2 xl:px-2 xl:w-1/3">
+        <h4 class="font-semibold text-tiny">
+          {{ customer?.defaultCurrency }}
+        </h4>
+        <p class="text-xxs text-secondary-text font-normal">Default Currency</p>
+      </div>
+
+      <!-- <div class="w-1/3  overflow-hidden xl:my-2 xl:px-2 xl:w-1/3"></div> -->
+
+      <div class="w-full mt-5">
+        <h4 class="font-medium text-xs">
+          {{ customer?.notes }}
+        </h4>
+        <p class="text-xxs text-secondary-text font-normal">Notes</p>
+      </div>
+    </div>
+  </div>
+</div>

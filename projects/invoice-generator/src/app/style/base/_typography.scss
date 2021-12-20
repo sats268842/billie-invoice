@@ -1,0 +1,85 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+button {
+  font-family: 'Poppins';
+  color: get-color(white);
+}
+
+h1 {
+  font-size: get-font-size(heading-1);
+  font-weight: 700;
+}
+
+h2 {
+  font-size: get-font-size(heading-2);
+  font-weight: 600;
+}
+
+h3 {
+  font-size: get-font-size(heading-3);
+  font-weight: 600;
+}
+
+h4 {
+  font-size: get-font-size(heading-4);
+  font-weight: 600;
+}
+
+h5 {
+  font-size: get-font-size(heading-5);
+  font-weight: 500;
+}
+
+h6 {
+  font-size: get-font-size(heading-6);
+  font-weight: 400;
+}
+
+p,
+label,
+span,
+ol,
+ul,
+caption {
+  font-family: get-font-family(subtitle-font-family);
+  color: get-color(greyint);
+}
+
+.subtitle-1 {
+  font-size: get-font-size(subtitle-1);
+  font-weight: 500;
+}
+
+.subtitle-1 {
+  font-size: get-font-size(subtitle-2);
+  font-weight: 500;
+}
+
+.body-1 {
+  font-size: get-font-size(body-1);
+  font-weight: 400;
+}
+
+.body-1 {
+  font-size: get-font-size(body-2);
+  font-weight: 400;
+}
+
+button {
+  font-family: get-font-family(headings-font-family);
+  font-weight: 600;
+}
+
+.caption {
+  font-size: get-font-size(caption);
+  font-weight: 400;
+}
+
+.overline {
+  font-size: get-font-size(overline);
+  font-weight: 400;
+}

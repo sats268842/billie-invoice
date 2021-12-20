@@ -1,0 +1,22 @@
+.bg-image {
+  background: linear-gradient(0deg, rgba(4, 167, 119, 0.3), rgba(4, 167, 119, 0.2)),
+    url('https://ik.imagekit.io/sats268842/lp_l6uHBUcWC.jpg?updatedAt=1636970456302');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  object-fit: cover;
+  // transition: all 0.7s;
+  // -webkit-animation: zoomin 10s linear;
+  //     animation: zoomin 5s alternate-reverse;
+  //     animation-fill-mode:both;
+  //   background-origin:center;
+}
+
+@keyframes zoomin {
+  0% {
+    background-size: 100%;
+  }
+  100% {
+    background-size: 120%;
+  }
+}

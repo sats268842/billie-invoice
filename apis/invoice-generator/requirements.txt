@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+bcrypt
+pymongo
+jinja2
+fastapi[all]
+boto3
+jwt
+stripe
+slack-sdk

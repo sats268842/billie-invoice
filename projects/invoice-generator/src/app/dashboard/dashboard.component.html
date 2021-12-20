@@ -1,0 +1,60 @@
+<!-- <app-alertmodal></app-alertmodal> -->
+<div class="flex flex-wrap">
+  <div class="w-full xl:w-1/12">
+    <app-sidenavbar [direction]="'left'"></app-sidenavbar>
+  </div>
+
+  <div class="w-full xl:w-11/12 px-5 md:px-10 py-6 md:py-8">
+    <div class="w-full mb-10 bg-white flex items-center justify-between" *ngIf="user$ | async as userdata">
+      <div>
+        <ul class="static">
+          <li class="rounded-md transition">
+            <a (click)="sideNavService.toggleSideNav()" class="flex items-center text-gray-700 dark:text-gray-200">
+              <span class="p-2 cursor-pointer flex justify-center items-center bg-white shadow-md rounded-md">
+                <ion-icon class="text-xl" name="grid-outline"></ion-icon>
+              </span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="flex md:justify-end items-center justify-start gap-5">
+        <span>
+          <a class="hidden md:block" routerLink="invoices/invoice-generator">
+            <button
+              class="
+                md:px-3
+                px-2
+                py-1
+                md:py-2
+                text-sm
+                border-primary border
+                bg-red-50
+                font-semibold
+                text-primary
+                rounded
+              "
+            >
+              Create Invoice
+            </button>
+          </a>
+        </span>
+
+        <span class="p-2 cursor-pointer bg-white shadow-md rounded-lg hover:bg-red-100">
+          <img appTooltip tooltip="Coming Soon!" class="w-6" src="../../../assets/icons/bell.png" alt="" />
+        </span>
+
+        <img
+          referrerpolicy="origin-when-cross-origin"
+          class="w-12 shadow rounded-full bg-white border border-blue-100"
+          [src]="userdata?.picture"
+          [alt]="userdata.given_name + 'photo'"
+        />
+        <span class="">
+          <h6 class="font-semibold md:text-sm text-xs">{{ userdata.given_name | titlecase }}</h6>
+          <h6 class="md:text-xs text-xs text-gray-500">admin</h6>
+        </span>
+      </div>
+    </div>
+    <router-outlet></router-outlet>
+  </div>
+</div>

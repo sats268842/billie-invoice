@@ -1,0 +1,62 @@
+@mixin container {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@mixin container-fluid {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@mixin flexcenter($direction) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: $direction;
+}
+
+@mixin flex-align-center($direction) {
+  display: flex;
+  align-items: center;
+  flex-direction: $direction;
+}
+
+@mixin flex-two-column($direction, $column-size) {
+  .row {
+    display: flex;
+    flex-direction: $direction;
+    width: 100%;
+    height: 100%;
+  }
+  .column {
+    flex: $column-size;
+  }
+}
+
+@mixin accent-button {
+  background: get-color(accent);
+  padding: 1rem 2rem;
+  border-radius: 5px;
+  color: get-color(darkgray);
+  font-size: get-font-size(subtitle-1);
+}
+
+@mixin animation-rotation-360 {
+  @keyframes spin {
+    100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+}
+
+@mixin heading {
+  color: get-color(primaryblue);
+  font-weight: 600;
+}

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <base href="/" />
+    <title>Invoice</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      crossorigin="anonymous"
+    />
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet" />
+    <style>
+      .row:after {
+        content: '';
+        display: table;
+        clear: both;
+      }
+      .column {
+        float: left;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body style="height: 100vh">
+    <div style="height: 100vh" class="h-full mx-auto font-sans bg-white">
+      <div class="p-4">
+        <div class="flex items-center justify-between mb-8">
+          <div>
+            <span class="text-2xl">Invoice</span>
+            <span class="font-bold text-2xl">{{invoice.invoiceID}}</span> <br />
+            <span>Date</span>: {{invoice.currentDate}} <br />
+          </div>
+        </div>
+
+        <div class="row mb-8">
+          <div class="column">
+            <p class="text-sm font-medium text-gray-600">From</p>
+            <span class="text-xl font-medium text-gray-800"> {{ invoice.from.name }} </span>
+            <br />
+            <address class="text-sm text-gray-300">
+              {{ invoice.from.address }}
+              <!-- <br> -->
+              {{ invoice.from.state }} {{ invoice.from.country }}
+            </address>
+            <span class="text-sm text-gray-300"> {{ invoice.to.email }} </span>
+            <br />
+            <span class="text-sm text-gray-300"> {{ invoice.from.phoneNumber }} </span>
+          </div>
+          <div class="column text-right">
+            <p class="text-sm font-medium text-gray-600">To</p>
+            <span class="text-xl font-medium text-gray-800"> {{ invoice.to.name }} </span>
+            <br />
+            <address class="text-sm text-gray-500">
+              {{ invoice.to.address }} {{ invoice.to.state }} {{ invoice.to.country }}
+            </address>
+
+            <span class="text-sm text-gray-500"> {{ invoice.to.email }} </span><br />
+            <span class="text-sm text-gray-500"> {{ invoice.to.phoneNumber }} </span>
+          </div>
+        </div>
+        <hr style="background-color: rgb(173, 173, 173); height: 1px; border: 0" />
+
+        <!-- <span style="border-top: 1px solid rgb(224, 224, 224)" class="w-full mb-8 px-3"></span> -->
+
+        <div class="lg:mt-4 py-4 min-w-full">
+          <div class="w-screen overflow-hidden invoice-table" style="width: 100%">
+            <table
+              class="min-w-full leading-normal"
+              style="width: 100%; border-collapse: separate; border-spacing: 0 1em"
+            >
+              <thead>
+                <tr>
+                  <th scope="col" class="px-5 py-3 text-gray-500 text-left text-sm font-medium">ID</th>
+                  <th scope="col" class="px-5 py-3 text-gray-500 text-left text-sm font-medium">Service</th>
+                  <!-- <th
+										scope="col"
+										class="
+											px-5
+											py-3
+											text-gray-500 text-left text-sm
+											font-medium
+										"
+										>Description</th
+									> -->
+
+                  <th scope="col" class="px-5 py-3 text-gray-500 text-left text-sm font-medium">Quantity</th>
+                  <th scope="col" class="px-5 py-3 text-gray-500 text-left text-sm font-medium">Price</th>
+                </tr>
+              </thead>
+              <tbody class="rounded-md">
+                {% for service in invoice.services %}
+                <tr i style="background-color: rgb(241, 241, 255)" class="w-full min-w-full bg-gray-50">
+                  <td class="px-5 py-5">
+                    <p class="text-gray-900 text-base font-semibold whitespace-no-wrap truncate">{{service.id}}</p>
+                  </td>
+                  <td class="px-5 py-5 text-sm">
+                    <p class="text-gray-900 text-base font-semibold whitespace-no-wrap">{{service.service}}</p>
+                  </td>
+
+                  <!-- <td class="px-5 py-5">
+										<p
+											class="
+												text-gray-900 text-base
+												font-semibold
+												whitespace-no-wrap
+											"
+											>Description</p
+										>
+									</td> -->
+
+                  <td class="px-5 py-5 text-sm">
+                    <p class="text-gray-900 text-base font-semibold whitespace-no-wrap">{{service.quantity}}</p>
+                  </td>
+
+                  <td class="px-5 py-5 text-sm">
+                    <p class="text-gray-900 text-base font-semibold whitespace-no-wrap">
+                      {{invoice.currency}} {{service.price}}
+                    </p>
+                  </td>
+                </tr>
+                {% endfor %}
+                <!-- <tr class="w-full min-w-full bg-blue-50">
+                  <td class="px-5 py-5">
+                    <p class="text-gray-900 text-base font-semibold whitespace-no-wrap truncate">2</p>
+                  </td>
+                  <td class="px-5 py-5 text-sm">
+                    <p class="text-gray-900 text-base font-semibold whitespace-no-wrap">Service #2</p>
+                  </td>
+
+                  <td class="px-5 py-5">
+                    <p class="text-gray-900 text-base font-semibold whitespace-no-wrap">Description</p>
+                  </td>
+
+                  <td class="px-5 py-5 text-sm">
+                    <p class="text-gray-900 text-base font-semibold whitespace-no-wrap">1</p>
+                  </td>
+
+                  <td class="px-5 py-5 text-sm">
+                    <p class="text-gray-900 text-base font-semibold whitespace-no-wrap">$ 30</p>
+                  </td>
+                </tr> -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="flex justify-between items-center mb-2 px-3">
+          <div class="text-sm font-medium leading-none"><span class="">Tax</span>:</div>
+          <div class="text-lg text-right font-medium">{{invoice.tax}}%</div>
+        </div>
+        <div class="flex justify-between items-center mb-2 px-3">
+          <div class="text-sm font-medium leading-none"><span class="">Discount</span>:</div>
+          <div class="text-lg text-right font-medium">{{invoice.discount}}%</div>
+        </div>
+        <div class="flex justify-between items-center mb-2 px-3">
+          <div class="text-2xl leading-none"><span class="">Total</span>:</div>
+          <div class="text-2xl text-right font-black">{{invoice.currency}} {{invoice.total}}</div>
+        </div>
+
+        <div class="flex mb-8 justify-end px-3">
+          <div class="text-right w-1/2 px-0 leading-tight"></div>
+        </div>
+
+        <div class="mb-8 px-3">
+          <span>To be paid before</span> on <b class="underline font-bold"> {{invoice.dueData}}</b>
+        </div>
+      </div>
+      <footer style="clear: both; bottom: 0" class="">
+        <div class="mb-8 text-4xl text-center px-3"><span>Thank you!</span><br /></div>
+        <div class="text-center mb-2">
+          <p class="text-base font-semibold text-gray-700">
+            Made with
+            <img
+              src="https://ik.imagekit.io/sats268842/heart_NhrEY8Oc7p8.png?updatedAt=1635492741218"
+              class="block mx-auto w-6"
+              alt=""
+            />
+            Billie
+          </p>
+        </div>
+
+        <div class="text-center text-sm mb-10">billie.digital</div>
+        <div
+          style="background-color: rgb(241, 241, 241); bottom: 0"
+          class="w-full p-9 mt-10 min-w-full bottom-0 flex justify-center bg-blue-100"
+        >
+          <img
+            src="https://ik.imagekit.io/sats268842/02__rtp1_4Mb.png?updatedAt=1635492754594"
+            load="defer"
+            class="block mx-auto text-center w-36 drop-shadow"
+            alt=""
+          />
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

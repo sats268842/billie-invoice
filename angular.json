@@ -1,0 +1,597 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": false
+  },
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "admin": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "ngx-build-plus:browser",
+          "options": {
+            "outputPath": "dist/admin/browser",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.app.json",
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": ["./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css", "src/styles.scss"],
+            "scripts": ["./node_modules/blueimp-canvas-to-blob/js/canvas-to-blob.min.js"],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
+          },
+          "configurations": {
+            "development": {
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "buildOptimizer": false,
+              "sourceMap": true,
+              "optimization": false,
+              "namedChunks": true
+            },
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "aot": true,
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "4mb",
+                  "maximumError": "8mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "20kb"
+                }
+              ]
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "ngx-build-plus:dev-server",
+          "defaultConfiguration": "development",
+          "options": {},
+          "configurations": {
+            "production": {
+              "browserTarget": "admin:build:production"
+            },
+            "development": {
+              "browserTarget": "admin:build:development"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "ngx-build-plus:extract-i18n",
+          "options": {
+            "browserTarget": "admin:build"
+          }
+        },
+        "test": {
+          "builder": "ngx-build-plus:karma",
+          "options": {
+            "main": "src/test.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.spec.json",
+            "karmaConfig": "karma.conf.js",
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": ["./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css", "src/styles.scss"],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["tsconfig.app.json", "tsconfig.spec.json", "e2e/tsconfig.json"],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "e2e/protractor.conf.js"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "admin:serve:production"
+            },
+            "development": {
+              "devServerTarget": "admin:serve:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/admin/server",
+            "main": "server.ts",
+            "tsConfig": "tsconfig.server.json",
+            "optimization": false,
+            "sourceMap": true,
+            "extractLicenses": false
+          },
+          "configurations": {
+            "development": {
+              "optimization": false,
+              "sourceMap": true,
+              "extractLicenses": false
+            },
+            "production": {
+              "outputHashing": "media",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "sourceMap": false,
+              "extractLicenses": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "configurations": {
+            "development": {
+              "browserTarget": "admin:build:development",
+              "serverTarget": "admin:server:development"
+            },
+            "production": {
+              "browserTarget": "admin:build:production",
+              "serverTarget": "admin:server:production"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "prerender": {
+          "builder": "@nguniversal/builders:prerender",
+          "options": {
+            "routes": ["/"]
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "admin:build:production",
+              "serverTarget": "admin:server:production"
+            },
+            "development": {
+              "browserTarget": "admin:build:development",
+              "serverTarget": "admin:server:development"
+            }
+          },
+          "defaultConfiguration": "production"
+        }
+      }
+    },
+    "invoice-generator": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        },
+        "@schematics/angular:application": {
+          "strict": true
+        }
+      },
+      "root": "projects/invoice-generator",
+      "sourceRoot": "projects/invoice-generator/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "ngx-build-plus:browser",
+          "options": {
+            "allowedCommonJsDependencies": ["lodash", "jspdf", "canvg", "raf", "@babel/runtime-corejs3"],
+            "extraWebpackConfig": "webpack.config.js",
+            "aot": true,
+            "outputPath": "dist/invoice-generator/browser",
+            "index": "projects/invoice-generator/src/index.html",
+            "main": "projects/invoice-generator/src/main.ts",
+            "polyfills": "projects/invoice-generator/src/polyfills.ts",
+            "tsConfig": "projects/invoice-generator/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "projects/invoice-generator/src/favicon.ico",
+              "projects/invoice-generator/src/assets",
+              "projects/invoice-generator/src/sitemap.xml",
+              "projects/invoice-generator/src/robots.txt"
+            ],
+            "styles": ["projects/invoice-generator/src/styles.scss", "node_modules/sweetalert2/src/sweetalert2.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "index": {
+                "input": "projects/invoice-generator/src/index-prod.html",
+                "output": "index.html"
+              },
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "10mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "5mb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "projects/invoice-generator/src/environments/environment.ts",
+                  "with": "projects/invoice-generator/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "staging": {
+              "optimization": true,
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "10mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "5mb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "projects/invoice-generator/src/environments/environment.ts",
+                  "with": "projects/invoice-generator/src/environments/environment.staging.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "ngx-build-plus:dev-server",
+          "options": {
+            "extraWebpackConfig": "webpack.config.js"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "invoice-generator:build:production"
+            },
+            "development": {
+              "browserTarget": "invoice-generator:build:development"
+            },
+            "staging": {
+              "browserTarget": "invoice-generator:build:staging"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "invoice-generator:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/invoice-generator/src/test.ts",
+            "polyfills": "projects/invoice-generator/src/polyfills.ts",
+            "tsConfig": "projects/invoice-generator/tsconfig.spec.json",
+            "karmaConfig": "projects/invoice-generator/karma.conf.js",
+            "inlineStyleLanguage": "scss",
+            "assets": ["projects/invoice-generator/src/favicon.ico", "projects/invoice-generator/src/assets"],
+            "styles": ["projects/invoice-generator/src/styles.scss"],
+            "scripts": []
+          }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/invoice-generator/server",
+            "main": "projects/invoice-generator/server.ts",
+            "tsConfig": "projects/invoice-generator/tsconfig.server.json",
+            "inlineStyleLanguage": "scss"
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media",
+              "fileReplacements": [
+                {
+                  "replace": "projects/invoice-generator/src/environments/environment.ts",
+                  "with": "projects/invoice-generator/src/environments/environment.prod.ts"
+                }
+              ]
+            },
+            "staging": {
+              "outputHashing": "media",
+              "fileReplacements": [
+                {
+                  "replace": "projects/invoice-generator/src/environments/environment.ts",
+                  "with": "projects/invoice-generator/src/environments/environment.staging.ts"
+                }
+              ]
+            },
+            "development": {
+              "optimization": false,
+              "sourceMap": true,
+              "extractLicenses": false
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "configurations": {
+            "development": {
+              "browserTarget": "invoice-generator:build:development",
+              "serverTarget": "invoice-generator:server:development"
+            },
+            "production": {
+              "browserTarget": "invoice-generator:build:production",
+              "serverTarget": "invoice-generator:server:production"
+            },
+            "staging": {
+              "browserTarget": "invoice-generator:build:staging",
+              "serverTarget": "invoice-generator:server:staging"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "prerender": {
+          "builder": "@nguniversal/builders:prerender",
+          "options": {
+            "routes": ["/invoice-generator"],
+            "guessRoutes": false
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "invoice-generator:build:production",
+              "serverTarget": "invoice-generator:server:production"
+            },
+            "development": {
+              "browserTarget": "invoice-generator:build:development",
+              "serverTarget": "invoice-generator:server:development"
+            },
+            "staging": {
+              "browserTarget": "invoice-generator:build:staging",
+              "serverTarget": "invoice-generator:server:staging"
+            }
+          },
+          "defaultConfiguration": "production"
+        }
+      }
+    },
+    "s3-manager": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        },
+        "@schematics/angular:application": {
+          "strict": true
+        }
+      },
+      "root": "projects/s3-manager",
+      "sourceRoot": "projects/s3-manager/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/s3-manager/browser",
+            "index": "projects/s3-manager/src/index.html",
+            "main": "projects/s3-manager/src/main.ts",
+            "polyfills": "projects/s3-manager/src/polyfills.ts",
+            "tsConfig": "projects/s3-manager/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": ["projects/s3-manager/src/favicon.ico", "projects/s3-manager/src/assets"],
+            "styles": ["projects/s3-manager/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "50kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "projects/s3-manager/src/environments/environment.ts",
+                  "with": "projects/s3-manager/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "s3-manager:build:production"
+            },
+            "development": {
+              "browserTarget": "s3-manager:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "s3-manager:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/s3-manager/src/test.ts",
+            "polyfills": "projects/s3-manager/src/polyfills.ts",
+            "tsConfig": "projects/s3-manager/tsconfig.spec.json",
+            "karmaConfig": "projects/s3-manager/karma.conf.js",
+            "inlineStyleLanguage": "scss",
+            "assets": ["projects/s3-manager/src/favicon.ico", "projects/s3-manager/src/assets"],
+            "styles": ["projects/s3-manager/src/styles.scss"],
+            "scripts": []
+          }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/s3-manager/server",
+            "main": "projects/s3-manager/server.ts",
+            "tsConfig": "projects/s3-manager/tsconfig.server.json",
+            "inlineStyleLanguage": "scss"
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media",
+              "fileReplacements": [
+                {
+                  "replace": "projects/s3-manager/src/environments/environment.ts",
+                  "with": "projects/s3-manager/src/environments/environment.prod.ts"
+                }
+              ]
+            },
+            "development": {
+              "optimization": false,
+              "sourceMap": true,
+              "extractLicenses": false
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "configurations": {
+            "development": {
+              "browserTarget": "s3-manager:build:development",
+              "serverTarget": "s3-manager:server:development"
+            },
+            "production": {
+              "browserTarget": "s3-manager:build:production",
+              "serverTarget": "s3-manager:server:production"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "prerender": {
+          "builder": "@nguniversal/builders:prerender",
+          "options": {
+            "routes": ["/"]
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "s3-manager:build:production",
+              "serverTarget": "s3-manager:server:production"
+            },
+            "development": {
+              "browserTarget": "s3-manager:build:development",
+              "serverTarget": "s3-manager:server:development"
+            }
+          },
+          "defaultConfiguration": "production"
+        }
+      }
+    },
+    "my-lib": {
+      "projectType": "library",
+      "root": "projects/my-lib",
+      "sourceRoot": "projects/my-lib/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/my-lib/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/my-lib/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/my-lib/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/my-lib/src/test.ts",
+            "tsConfig": "projects/my-lib/tsconfig.spec.json",
+            "karmaConfig": "projects/my-lib/karma.conf.js"
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "admin"
+}

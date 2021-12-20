@@ -1,0 +1,15 @@
+.error-msg {
+  margin: 5px;
+  font-family: get-font-size(subtitle-font-family);
+  font-weight: 500;
+  font-size: get-font-size(subtitle-2);
+  color: get-color(error) !important;
+}
+
+.success-msg {
+  margin: 5px;
+  font-family: get-font-size(subtitle-font-family);
+  font-weight: 500;
+  font-size: get-font-size(subtitle-2);
+  color: get-color(success) !important;
+}

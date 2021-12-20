@@ -1,0 +1,152 @@
+<div class="flex relative flex-wrap h-full overflow-y-auto overflow-x-hidden" style="-webkit-overflow-scrolling: touch">
+  <div class="w-full relative object-contain h-2.5/6 md:h-2.5/6 object-bottom">
+    <span class="shadow bg-white p-1 absolute left-5 top-7 z-50 rounded flex justify-center items-center">
+      <ion-icon (click)="onClose()" class="text-xl" name="arrow-back-outline"></ion-icon>
+    </span>
+
+    <img class="rounded-b-3xl" src="../../../../assets/icons/ToyFaces_Colored_BG_56.jpg" />
+  </div>
+
+  <div class="w-full h-3.5/6 md:h-3.5/6 relative px-6 py-10">
+    <div
+      class="
+        flex flex-row
+        bg-white
+        gap-4
+        mx-6
+        shadow-sm
+        rounded
+        px-3
+        py-3
+        left-0
+        right-0
+        justify-around
+        -mt-20
+        absolute
+      "
+    >
+      <div class="">
+        <h2 class="font-semibold">{{ customerInvoices.length }}</h2>
+        <p class="text-secondary-text text-xxs">Invoices</p>
+      </div>
+
+      <div class="">
+        <h2 class="font-semibold">{{ customerIncome }}</h2>
+        <p class="text-secondary-text text-xxs">Income</p>
+      </div>
+
+      <div class="">
+        <h2
+          class="font-semibold"
+          [ngClass]="customerInvoices[0]?.invoiceStatus === 'Sent' ? 'text-secondary' : 'text-primary'"
+        >
+          {{ customerInvoices[0]?.invoiceStatus ? customerInvoices[0]?.invoiceStatus : 'None' }}
+        </h2>
+        <p class="text-secondary-text text-xxs">Last Invoice Status</p>
+      </div>
+    </div>
+
+    <div>
+      <h1 class="text-2xl font-semibold">
+        {{ customer?.name }}
+      </h1>
+      <p class="text-secondary-text text-xxs">
+        {{ customer?.email }}
+      </p>
+    </div>
+
+    <div class="justify-center gap-4 flex mt-8">
+      <div>
+        <!-- <a [href]="tel: {{customer?.contactNo}}"> -->
+        <span class="p-1.5 rounded-full shadow flex justify-center items-center">
+          <ion-icon name="call-outline" class="block text-lg"></ion-icon>
+        </span>
+        <!-- </a> -->
+      </div>
+      <div>
+        <!-- <a [href]="mailto:+customer?.email"> -->
+        <span class="p-1.5 rounded-full shadow flex justify-center items-center">
+          <ion-icon name="mail-outline" class="block text-lg"></ion-icon>
+        </span>
+        <!-- </a> -->
+      </div>
+    </div>
+    <!-- Column Content -->
+    <div class="flex flex-wrap xl:-mx-2 mt-8">
+      <div class="w-1/2 my-2 px-1 xl:my-2 xl:px-2 xl:w-1/2">
+        <p class="text-xxs text-secondary-text font-normal">Customer Type</p>
+        <h4 class="font-semibold text-tiny">
+          {{ customer?.customerType }}
+        </h4>
+      </div>
+
+      <div class="w-1/2 my-2 px-1 xl:my-2 xl:px-2 xl:w-1/2">
+        <p class="text-xxs text-secondary-text font-normal">Tax Type</p>
+        <h4 class="font-semibold text-tiny">
+          {{ customer?.taxType }}
+        </h4>
+      </div>
+
+      <div class="w-1/2 my-2 px-1 xl:my-2 xl:px-2 xl:w-1/2">
+        <p class="text-xxs text-secondary-text font-normal">Tax ID</p>
+        <h4 class="font-semibold text-tiny">
+          {{ customer?.taxID }}
+        </h4>
+      </div>
+
+      <div class="w-1/2 my-2 px-1 xl:my-2 xl:px-2 xl:w-1/2">
+        <p class="text-xxs text-secondary-text font-normal">Contact No</p>
+        <h4 class="font-semibold text-tiny">
+          {{ customer?.contactNo }}
+        </h4>
+      </div>
+
+      <div class="w-1/2 my-2 px-1 xl:my-2 xl:px-2 xl:w-1/2">
+        <p class="text-xxs text-secondary-text font-normal">Default Currency</p>
+        <h4 class="font-semibold text-tiny">
+          {{ customer?.defaultCurrency }}
+        </h4>
+      </div>
+
+      <div class="w-1/2 my-2 px-1 xl:my-2 xl:px-2 xl:w-1/2">
+        <p class="text-xxs text-secondary-text font-normal">Created</p>
+        <h4 class="font-semibold text-tiny">
+          {{ customer?.createdDate | timeAgo | titlecase }}
+        </h4>
+      </div>
+
+      <!-- <div class="w-1/3   xl:my-2 xl:px-2 xl:w-1/3"></div> -->
+
+      <div class="w-full mt-5">
+        <p class="text-xxs text-secondary-text font-normal">Notes</p>
+        <h4 class="font-medium text-xs">
+          {{ customer?.notes }}
+        </h4>
+      </div>
+    </div>
+    <div class="mt-8 mb-8">
+      <h2 class="text-primary-text text-tiny font-medium mb-4">Recent Invoices</h2>
+
+      <ng-container *ngFor="let invoice of customerInvoices; let i = index">
+        <div class="mt-2 flex flex-wrap" *ngIf="customerInvoices.length > 0; else noinvoices">
+          <div class="w-0.5/3 flex justify-start items-center">
+            <span class="p-1.5 rounded shadow mr-auto bg-secondary">
+              <ion-icon name="document-text-outline" class="block text-xl text-white"></ion-icon>
+            </span>
+          </div>
+
+          <div class="w-2/3 ml-2">
+            <h6 class="text-sm font-medium text-primary-text">Invoice - {{ invoice?.invoiceID }}</h6>
+            <p class="md:text-xs text-xxs text-secondary-text font-medium">{{ invoice?.createdDate | timeAgo }}</p>
+          </div>
+          <div class="w-0.5/3">
+            <h6 class="text-sm md:text-xs font-semibold text-primary-text">
+              {{ invoice?.total | currency: invoice?.currency }}
+            </h6>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>
+<ng-template #noinvoices> No Invoice Found </ng-template>

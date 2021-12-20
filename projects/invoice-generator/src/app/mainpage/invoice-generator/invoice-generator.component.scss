@@ -1,0 +1,33 @@
+.invoice-generator {
+  // content-visibility: auto;
+  input,
+  textarea {
+    border: none;
+    background: transparent;
+    outline: none;
+    border-bottom: 0.5px dotted rgb(167, 167, 167);
+
+    &:focus {
+      outline: none;
+      border: none;
+      outline-style: none;
+      box-shadow: none;
+      border-color: transparent;
+    }
+    overflow: hidden;
+  }
+
+  .input-holder:after {
+    content: '%';
+  }
+}
+input[type='date'] {
+  border-bottom: 1px solid rgb(126, 126, 126) !important;
+}
+textarea:focus,
+input:focus {
+  outline: none;
+}
+::-webkit-calendar-picker-indicator {
+  // filter: invert(1);
+}

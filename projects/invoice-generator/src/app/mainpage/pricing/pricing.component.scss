@@ -1,0 +1,15 @@
+.form-group {
+  padding: 10px;
+  border: 2px solid;
+  margin: 10px;
+}
+.form-group > label {
+  position: absolute;
+  top: -1px;
+  left: 20px;
+  background-color: white;
+}
+
+.form-group > input {
+  border: none;
+}

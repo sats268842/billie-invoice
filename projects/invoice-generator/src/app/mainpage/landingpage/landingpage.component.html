@@ -1,0 +1,178 @@
+<main class="bg relative bg-white min-h-screen">
+  <div class="flex flex-wrap overflow-hidden min-h-screen">
+    <div class="w-full py-10 md:py-0 order-2 md:order-1 px-10 md:px-20 flex items-center overflow-hidden lg:w-1/2">
+      <div>
+        <span class="flex items-center">
+          <div class="w-4 flex justify-center items-center h-4 bg-secondary mr-2 shadow">
+            <ion-icon name="checkmark-outline" class="text-white p-0.5"></ion-icon>
+          </div>
+          <p class="text-secondary text-2xl font-display inline-block">For your Business/Freelance</p>
+        </span>
+
+        <h3 class="text-left text-primary-text font-serif text-4xl md:text-5xl mb-5">
+          Best Way to Generate<br />
+          <span class="text-primary font-medium">
+            Invoice <ion-icon class="text-secondary" name="print-outline"></ion-icon>
+          </span>
+        </h3>
+        <p class="font-normal text-tiny text-left text-secondary-text leading-7">
+          Billie invoice generator is online invoicing software that helps you craft professional invoices. With the
+          free invoice generator, you can quickly create design-conscious, professional invoices. With a single click,
+          you can create stunning invoices!
+        </p>
+        <div class="flex gap-5 mt-5">
+          <a [routerLink]="['./invoice-generator']">
+            <button
+              class="
+                font-serif
+                rounded-sm
+                text-white
+                font-bold
+                md:text-lg
+                text-base
+                tracking-wider
+                px-5
+                py-2.5
+                bg-green
+              "
+            >
+              Free Invoice
+            </button>
+          </a>
+
+          <a [routerLink]="(isLoggedIn$ | async) ? ['/dashboard'] : ['/dashboard']">
+            <button
+              class="
+                font-serif
+                rounded-sm
+                text-black
+                font-bold
+                md:text-lg
+                text-base
+                tracking-wider
+                px-8
+                py-2
+                border-2 border-primary
+              "
+            >
+              {{ (isLoggedIn$ | async) ? 'Dashboard' : 'Login' }}
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="w-full pt-20 pb-6 md:mb-0 md:pt-0 md:py-0 bg-red-50 overflow-hidden md:block idden relative lg:w-1/2">
+      <!-- <div class="right-0 relative bottom-0 p-5"> -->
+      <div class="w-full flex justify-center h-full items-center mx-auto">
+        <img
+          src="https://ik.imagekit.io/sats268842/Group_11_oyhHt7KqpW.png?updatedAt=1637328191670"
+          class="w-9/12 md:w-7/12"
+          alt=""
+        />
+      </div>
+
+      <!-- </div> -->
+    </div>
+  </div>
+  <!-- <div class="bottom-20 absolute w-full">
+    <div class="flex justify-center mb-5">
+      <button class="font-serif rounded-sm text-white font-bold text-lg tracking-wider px-5 py-2.5 bg-primary">
+        Generate
+      </button>
+    </div>
+  </div> -->
+</main>
+
+<section class="px-10 md:px-20 py-10 md:py-20">
+  <div class="justify-center mb-6 md:mb-20 flex">
+    <h2 class="font-serif text-2xl md:text-4xl text-center">
+      Solution Needed for<br />
+      <span class="font-bold text-4xl"> Freelancers </span>
+    </h2>
+  </div>
+  <div class="relative items-center w-full px-5 py-12 mx-auto md:px-12 lg:px-24 max-w-7xl">
+    <div class="grid w-full grid-cols-1 gap-6 md:gap-12 mx-auto lg:grid-cols-3">
+      <div class="p-6">
+        <div
+          class="
+            inline-flex
+            items-center
+            justify-center
+            flex-shrink-0
+            w-14
+            h-14
+            mx-auto
+            mb-5
+            text-red-50
+            rounded-full
+            bg-red-50
+            shadow-sm
+          "
+        >
+          <img src="../../../assets/business-report.png" alt="" />
+        </div>
+
+        <h1 class="mx-auto mb-8 text-lg font-semibold leading-none tracking-tight text-neutral-600 lg:text-xl">
+          Dashboard
+        </h1>
+        <p class="mx-auto text-tiny leading-relaxed text-secondary-text">
+          You can view your income statistics here. Dashboard features a tracker for income, invoices, and customers.
+        </p>
+      </div>
+      <div class="p-6">
+        <div
+          class="
+            inline-flex
+            items-center
+            justify-center
+            flex-shrink-0
+            w-14
+            h-14
+            mx-auto
+            mb-5
+            text-red-50
+            rounded-full
+            bg-red-50
+            shadow-sm
+          "
+        >
+          <img class="" src="../../../assets/rating.png" alt="" />
+        </div>
+        <h1 class="mx-auto mb-8 text-lg font-semibold leading-none tracking-tight text-neutral-600 lg:text-xl">
+          Customer Manager
+        </h1>
+        <p class="mx-auto text-tiny leading-relaxed text-secondary-text">
+          You can add and edit customer information here. As a result, you can add the customer immediately to the
+          invoice.
+        </p>
+      </div>
+      <div class="p-6">
+        <div
+          class="
+            inline-flex
+            items-center
+            justify-center
+            flex-shrink-0
+            h-14
+            w-14
+            mx-auto
+            mb-5
+            text-red-50
+            rounded-full
+            bg-red-50
+            shadow-sm
+          "
+        >
+          <img src="../../../assets/invoice.png" alt="" />
+        </div>
+        <h1 class="mx-auto mb-8 text-lg font-semibold leading-none tracking-tight text-neutral-600 lg:text-xl">
+          Invoice Manager
+        </h1>
+        <p class="mx-auto text-tiny leading-relaxed text-secondary-text">
+          Invoice management allows you to manage and view your invoices.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

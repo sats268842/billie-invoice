@@ -1,0 +1,20 @@
+button {
+  cursor: pointer;
+  font-size: get-font-size(button);
+  &.exit-button {
+    padding: 10px 50px;
+    h5,
+    mat-icon {
+      color: get-color(altaccent);
+      display: inline;
+      padding: 5px;
+    }
+  }
+  &.confirm-button {
+    padding: 10px 50px;
+    h6 {
+      color: get-color(darkgrey);
+      font-weight: get-font-weight(regular);
+    }
+  }
+}

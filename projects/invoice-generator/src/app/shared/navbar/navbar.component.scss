@@ -1,0 +1,27 @@
+.sticky {
+  position: fixed;
+  background: white;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  padding: 0.5rem 0.5rem;
+  opacity: 0.9;
+  width: 100%;
+  .navbar {
+    &-logo {
+      width: 100px;
+      filter: brightness(1) invert(0) drop-shadow(1px 1px 1px rgb(78, 78, 78));
+    }
+
+    &-items {
+      &-button {
+        color: black;
+      }
+      li {
+        cursor: pointer;
+        font-weight: 500;
+        color: #111111;
+        list-style: none;
+        // color: #3423a6;
+      }
+    }
+  }
+}

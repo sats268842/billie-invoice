@@ -1,0 +1,36 @@
+/* You can add global styles to this file, and also import other style files */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import url('https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+.tooltip {
+  position: absolute;
+  max-width: 90%;
+  font-size: 14px;
+  text-align: center;
+  color: #000000;
+  padding: 6px 10px;
+  margin-top: 1rem;
+  background: white;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  border-radius: 5px;
+  z-index: 1000;
+  opacity: 0;
+  display: none;
+}
+
+.tooltip_show {
+  opacity: 1;
+  display: block;
+}
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}

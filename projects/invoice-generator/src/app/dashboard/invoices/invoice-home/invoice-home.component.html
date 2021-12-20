@@ -1,0 +1,139 @@
+<!-- <app-loader *ngIf="isLoading$ | async;e"> </app-loader> -->
+
+<div class="w-full overflow-hidden sm:w-12/12 xl:w-8/12 px-0 md:px-6" *ngIf="invoices$ | async as invoices">
+  <div class="flex flex-row justify-between">
+    <h2 class="mt-5 mb-5 text-2xl font-semibold">Invoices</h2>
+  </div>
+  <div>
+    <ng-container *ngFor="let item of invoices.invoices; let i = index; trackBy: trackElement">
+      <div class="flex mb-5 bg-blue-50 rounded shadow flex-wrap overflow-hidden xl:-mx-3 p-2 md:px-2">
+        <div class="flex w-full flex-col">
+          <div class="md:px-5 px-1 flex justify-between border-b-2 border-dashed border-gray-200">
+            <div class="flex mb-2 flex-col">
+              <h6 class="text-xs md:text-sm font-normal text-gray-700">Invoice Date</h6>
+              <p class="text-sm md:text-sm text-black font-medium">
+                {{ item?.currentDate | date }}
+              </p>
+            </div>
+
+            <div class="flex mb-2 flex-col">
+              <h6 class="text-xs md:text-xs font-normal text-gray-700 mb-2">Status</h6>
+              <p class="text-sm md:text-sm text-black font-medium">
+                <span class="bg-red-100 text-red-500 text-xs font-semibold px-3 py-1 rounded-full">
+                  {{ item?.invoiceStatus }}
+                </span>
+              </p>
+            </div>
+          </div>
+          <div class="flex mt-1 flex-row">
+            <div class="w-full flex overflow-hidden xl:my-3 xl:px-3 xl:w-2/6">
+              <div class="flex flex-col">
+                <h6 class="text-xs md:text-xs font-normal text-gray-700">Client Name</h6>
+                <p class="text-sm md:text-md text-black font-semibold">
+                  {{ item?.to.name ? item?.to.name : 'No Name' }}
+                </p>
+              </div>
+            </div>
+
+            <div class="w-full overflow-hidden xl:my-3 xl:px-3 xl:w-3/6">
+              <div class="flex flex-col">
+                <!-- <h6 class="text-xs md:text-sm font-semibold text-gray-700">Client Name</h6>
+                <p class="text-xs md:text-xs text-black font-medium">
+                  {{ item?.to.name ? item?.to.name : 'No Name' }}
+                </p> -->
+              </div>
+              <!-- <h6 class="text-xs md:text-sm font-semibold text-gray-700">
+                {{ item?.to.name ? item?.to.name : 'No Name' }}
+              </h6>
+              <p class="text-xs md:text-sm text-black font-medium">
+                {{ item?.to.email ? item?.to.email : 'No Email' }}
+              </p> -->
+            </div>
+
+            <div class="w-full overflow-hidden xl:my-3 xl:px-3 xl:w-1/6">
+              <div class="flex flex-col">
+                <h6 class="text-xs md:text-xs font-normal text-gray-700">Amount</h6>
+                <p class="text-sm md:text-sm text-black font-medium">
+                  {{ item?.total | currency: item?.currency }}
+                </p>
+              </div>
+            </div>
+
+            <div class="w-full overflow-hidden xl:my-3 xl:px-3 xl:w-1/6">
+              <div class="flex gap-5">
+                <div class="flex justify-end gap-2 md:gap-3">
+                  <div (click)="deleteInvoice(item?._id)" class="cursor-pointer p-1.5 shadow rounded bg-white">
+                    <ion-icon class="md:w-5 w-3 mx-auto block text-primary" name="trash-outline"></ion-icon>
+                  </div>
+                  <div class="cursor-pointer p-1.5 shadow rounded bg-white">
+                    <ion-icon class="md:w-5 w-3 mx-auto block text-secondary" name="download-outline"></ion-icon>
+              
+                  </div>
+                </div>
+                <!-- <div (click)="deleteInvoice(item?._id)" class="cursor-pointer p-2 w-8 shadow rounded-lg bg-white">
+                  <img class="w-6 block" src="../../../assets/icons/delete.png" alt="" />
+                </div>
+                <div (click)="deleteInvoice(item?._id)" class="cursor-pointer p-2 w-8 shadow rounded-lg bg-white">
+                  <ion-icon name="download-outline"></ion-icon>
+                </div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="isLoading">
+      <div class="text-center p-10">Loading......................................</div>
+    </ng-container>
+    <span *ngIf="limit >= count && invoices.length > 0">
+      <div class="text-center p-10">Finished......................................</div>
+    </span>
+  </div>
+
+  <!-- <table (scroll)="onScroll($event)" class="table-auto overflow-x-auto w-full mt-10">
+    <thead>
+      <tr>
+        <th></th>
+        <th class="text-xs font-light"></th>
+        <th class="text-xs text-gray-400">Name</th>
+        <th class="text-xs text-gray-400">Created Date</th>
+        <th class="text-xs text-gray-400">Amount</th>
+        <th class="text-xs text-gray-400">Action</th>
+      </tr>
+    </thead>
+    <tbody class="overflow-y-scroll min-h-42 h-22">
+      <tr class="rounded-md" *ngFor="let item of invoices.invoices; let i = index; trackBy: trackElement">
+        <td>{{ i }}</td>
+        <td class="flex py-4">
+          <span class="p-2 bg-red-400 mx-auto rounded shadow-md">
+            <img
+              class="w-4 md:w-8 shadow rounded-sm md:rounded-xl block filter invert"
+              [src]="i % 2 == 0 ? '../../../assets/icons/bill.png' : '../../../assets/icons/bill.png'"
+              alt=""
+            />
+          </span>
+        </td>
+
+        <td class="py-4">
+          <h6 class="text-xs md:text-sm font-semibold text-gray-700">
+            {{ item?.to.name ? item?.to.name : 'No Name' }}
+          </h6>
+          <p class="text-xs md:text-sm text-gray-500 font-medium">{{ item?.to.email ? item?.to.email : 'No Email' }}</p>
+        </td>
+        <td class="md:px-8 px-4 py-4">
+          <h6 class="text-xs md:text-sm font-semibold text-gray-700">{{ item?.currentDate | date }}</h6>
+        </td>
+        <td class="md:px-8 px-4 py-4">
+          <h6 class="text-xs md:text-sm font-semibold text-gray-700">{{ item?.total | currency: item?.currency }}</h6>
+        </td>
+
+        <td class="md:px-8 px-4 py-4">
+          <div (click)="deleteInvoice(item?._id)" class="cursor-pointer p-2 w-8 shadow rounded-lg mx-auto bg-white">
+            <img class="w-6 block" src="../../../assets/icons/delete.png" alt="" />
+          </div>
+        </td>
+      </tr>
+      <div class="" *ngIf="isLoading$ | async">Loading......................................</div>
+    </tbody>
+  </table> -->
+</div>

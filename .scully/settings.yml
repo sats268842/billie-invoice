@@ -1,0 +1,11 @@
+identifier: kaw62cq3w7vff929
+appPort: 1864
+staticPort: 1668
+reloadPort: 2667
+hostName: localhost
+projectName: invoice-generator
+homeFolder: C:\Users\santh\src\repos\ecommerce-admin-panel
+distFolder: dist/invoice-generator/browser
+outDir: C:\Users\santh\src\repos\ecommerce-admin-panel\dist\invoice-generator\static
+handle404: ''
+allowErrorCollect: false

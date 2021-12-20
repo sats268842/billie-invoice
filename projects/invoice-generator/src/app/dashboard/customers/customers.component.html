@@ -1,0 +1,84 @@
+<div class="flex md:flex-row sm:flex-col flex-wrap">
+  <div class="md:w-8/12 w-full xl:w-8/12 px-0 md:px-6" *ngIf="customers$ | async as customers">
+    <div class="flex flex-row justify-between items-center">
+      <h2 class="mt-5 mb-5 text-2xl font-semibold">Customers</h2>
+      <div class="rounded-sm sm:mt-0">
+        <button
+          (click)="addUser()"
+          class="
+            px-3
+            py-1.5
+            md:py-2
+            bg-blue-100
+            text-primary
+            font-semibold
+            border border-primary
+            ml-auto
+            text-xs
+            rounded
+          "
+        >
+          Add Customer
+        </button>
+      </div>
+    </div>
+    <app-add-customer (addUserState)="changeHide($event)" *ngIf="addUserState"></app-add-customer>
+    <ng-container *ngFor="let item of customers; let i = index; trackBy: trackElement">
+      <div class="mt-5 flex p-2 flex-wrap xl:-mx-3" *ngIf="customers.length > 0; else nocustomers">
+        <div class="mb-3 my-3 xl:my-3 xl:px-3 md:w-1/6">
+          <div class="object-cover bg-white" *ngIf="item.customerType === 'Individual'">
+            <img
+              class="md:w-12 w-11 drop-shadow rounded md:rounded-lg block"
+              [src]="
+                i % 2 == 0
+                  ? '../../../assets/icons/ToyFaces_Colored_BG_56.jpg'
+                  : '../../../assets/icons/ToyFaces_Colored_BG_29.jpg'
+              "
+              alt=""
+            />
+          </div>
+          <div *ngIf="item.customerType === 'Organization'" class="bg-white drop-shadow rounded p-2 md:w-12 w-10">
+            <img class="mx-auto block" src="../../../assets/icons/organization1.png" alt="" />
+          </div>
+        </div>
+
+        <div class="my-3 px-3 xl:my-3 xl:px-3 w-3/6 md:w-2/6">
+          <h6 class="text-sm md:text-tiny font-semibold text-gray-700">{{ item.name }}</h6>
+          <p class="md:text-xs text-mini text-gray-500 font-medium">{{ item.email }}</p>
+        </div>
+
+        <div class="my-3 px-3 hidden md:block xl:my-3 xl:px-3 md:w-1/6">
+          <h6 class="text-sm font-semibold text-gray-700">{{ item.contactNo }}</h6>
+        </div>
+
+        <div class="my-3 hidden md:block px-3 xl:my-3 xl:px-3 w-2/6 md:w-1/6">
+          <h6 class="text-sm font-semibold text-gray-700">{{ item?.customerType }}</h6>
+        </div>
+
+        <div class="my-3 px-3 xl:my-3 xl:px-3 w-2/6 md:w-1/6">
+          <div class="flex justify-end gap-2 md:gap-4">
+            <div (click)="deleteCustomer(item?._id)" class="cursor-pointer p-2 shadow rounded bg-white">
+              <img class="md:w-4 w-3" src="../../../assets/icons/delete.png" alt="" />
+            </div>
+            <div (click)="selectCustomer(item)" class="cursor-pointer p-2 shadow rounded bg-white">
+              <img class="md:w-4 w-3" src="../../../assets/icons/menu2.png" alt="" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+  <div
+    [ngClass]="viewCustomerStatus ? ' top-0 right-0 h-screen  min-h-screen fixed bg-white shadow block' : 'hidden'"
+    class="w-full transition-all duration-1000 delay-100 ease-out mt-0 xl:w-4/12 px-0 md:px-0"
+  >
+    <app-view-customer (onCloseStatus)="doClose($event)" [customer]="selectedCustomer"> </app-view-customer>
+  </div>
+</div>
+<ng-template #nocustomers>
+  <div class="flex min-h-full font-medium text-gray-500 text-xl w-full justify-center items-center">
+    No Customers Found
+  </div>
+</ng-template>
+
+<ng-template #isLoading> Loading....................... </ng-template>

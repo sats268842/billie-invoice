@@ -1,0 +1,319 @@
+<div class="bg-white py-6 sm:py-8 lg:py-12">
+  <div class="max-w-screen-2xl px-4 md:px-8 mx-auto">
+    <!-- text - start -->
+    <div class="mb-10 md:mb-16">
+      <h2 class="text-gray-800 text-2xl lg:text-3xl font-bold text-center mb-4 md:mb-6">Add Customer</h2>
+    </div>
+
+    <form
+      [formGroup]="customerForm"
+      autocomplete="false"
+      (ngSubmit)="onSubmit()"
+      novalidate
+      class="max-w-screen-md grid sm:grid-cols-2 gap-4 mx-auto"
+    >
+      <div>
+        <label for="first-name" class="inline-block text-gray-800 text-sm sm:text-base mb-2">Name</label>
+        <input
+          name="first-name"
+          formControlName="name"
+          class="
+            w-full
+            bg-gray-50
+            text-gray-800
+            border
+            focus:ring
+            rounded
+            outline-none
+            transition
+            duration-100
+            px-3
+            py-2
+          "
+        />
+      </div>
+
+      <div>
+        <label for="last-name" class="inline-block text-gray-800 text-sm sm:text-base mb-2">Email</label>
+        <input
+          name="last-name"
+          type="email"
+          formControlName="email"
+          class="
+            w-full
+            bg-gray-50
+            text-gray-800
+            border
+            focus:ring
+            rounded
+            outline-none
+            transition
+            duration-100
+            px-3
+            py-2
+          "
+        />
+      </div>
+
+      <div class="sm:col-span-2">
+        <label for="company" class="inline-block text-gray-800 text-sm sm:text-base mb-2">Contact No.</label>
+        <input
+          name="company"
+          formControlName="contactNo"
+          class="
+            w-full
+            bg-gray-50
+            text-gray-800
+            border
+            focus:ring
+            rounded
+            outline-none
+            transition
+            duration-100
+            px-3
+            py-2
+          "
+        />
+      </div>
+
+      <div>
+        <label for="first-name" class="inline-block text-gray-800 text-sm sm:text-base mb-2">Customer Type</label>
+        <select
+          formControlName="customerType"
+          id="customerType"
+          class="
+            block
+            w-full
+            py-2
+            px-3
+            border border-gray-300
+            bg-white
+            rounded-md
+            shadow-sm
+            focus:outline-none focus:ring-primary-500 focus:border-primary-500
+          "
+          name="Customer Type"
+        >
+          <option value="">Select an option</option>
+          <option value="Individual">Individual</option>
+          <option value="Organization">Organization</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="last-name" class="inline-block text-gray-800 text-sm sm:text-base mb-2">Tax Type</label>
+        <select
+          formControlName="taxType"
+          id="animals"
+          class="
+            block
+            w-full
+            py-2
+            px-3
+            border border-gray-300
+            bg-white
+            rounded-md
+            shadow-sm
+            focus:outline-none focus:ring-primary-500 focus:border-primary-500
+          "
+          name="Tax Type"
+        >
+          <option value="">Select an option</option>
+          <option value="GST">GST</option>
+          <!-- <option value="cat">Organization</option> -->
+        </select>
+      </div>
+
+      <div class="sm:col-span-2">
+        <label for="company" class="inline-block text-gray-800 text-sm sm:text-base mb-2">Tax ID.</label>
+        <input
+          name="company"
+          formControlName="contactNo"
+          class="
+            w-full
+            bg-gray-50
+            text-gray-800
+            border
+            focus:ring
+            rounded
+            outline-none
+            transition
+            duration-100
+            px-3
+            py-2
+          "
+        />
+      </div>
+      <div class="flex flex-col gap- example-form">
+        <label for="first-name" class="inline-block text-gray-800 text-sm sm:text-base mb-2">Currency</label>
+        <input
+          type="text"
+          placeholder="Pick one"
+          aria-label="String"
+          matInput
+          [formControl]="currencyOptionControl"
+          [matAutocomplete]="currencyauto"
+        />
+        <mat-autocomplete
+          (optionSelected)="onCurrencySelectionChanged($event)"
+          [displayWith]="displayCurrencyFn"
+          autoActiveFirstOption
+          #currencyauto="matAutocomplete"
+        >
+          <mat-option *ngFor="let option of filteredCurrencyOptions | async" [value]="option">
+            {{ option }}
+          </mat-option>
+        </mat-autocomplete>
+      </div>
+
+      <span class="sm:col-span-2 space-y-2" formGroupName="address">
+        <div>
+          <label for="last-name" class="inline-block text-gray-800 text-sm sm:text-base mb-2">Street1</label>
+          <input
+            name="last-name"
+            type="text"
+            formControlName="street1"
+            class="
+              w-full
+              bg-gray-50
+              text-gray-800
+              border
+              focus:ring
+              rounded
+              outline-none
+              transition
+              duration-100
+              px-3
+              py-2
+            "
+          />
+        </div>
+
+        <div>
+          <label for="first-name" class="inline-block text-gray-800 text-sm sm:text-base mb-2">Street2</label>
+          <input
+            name="first-name"
+            formControlName="street2"
+            type="text"
+            class="
+              w-full
+              bg-gray-50
+              text-gray-800
+              border
+              focus:ring
+              rounded
+              outline-none
+              transition
+              duration-100
+              px-3
+              py-2
+            "
+          />
+        </div>
+
+        <div class="flex flex-col gap-1 example-form">
+          <label for="country" class="inline-block text-gray-800 text-sm sm:text-base mb-2">Country</label>
+
+          <input
+            id="country"
+            type="text"
+            placeholder="Select Country"
+            matInput
+            [formControl]="countryControl"
+            [matAutocomplete]="countryauto"
+          />
+          <mat-autocomplete
+            (optionSelected)="onCountrySelectionChanged($event)"
+            [displayWith]="displayFn"
+            autoActiveFirstOption
+            #countryauto="matAutocomplete"
+          >
+            <mat-option *ngFor="let country of filteredCountryOptions | async" [value]="country.country">
+              {{ country.country }}
+            </mat-option>
+          </mat-autocomplete>
+        </div>
+
+        <div class="flex flex-col gap-2 example-form">
+          <label for="state" class="inline-block text-gray-800 text-sm sm:text-base mb-2">State</label>
+
+          <input
+            type="text"
+            id="state"
+            placeholder="Select State"
+            matInput
+            [formControl]="stateOptionControl"
+            [matAutocomplete]="stateauto"
+          />
+          <mat-autocomplete
+            (optionSelected)="onStateSelectionChanged($event)"
+            [displayWith]="displayStateFn"
+            autoActiveFirstOption
+            #stateauto="matAutocomplete"
+          >
+            <mat-option *ngFor="let option of filteredStateOptions | async" [value]="option">
+              {{ option }}
+            </mat-option>
+          </mat-autocomplete>
+        </div>
+      </span>
+
+      <div class="flex flex-col gap-2">
+        <label for="notes" class="inline-block text-gray-800 text-sm sm:text-base mb-2">Notes</label>
+        <input
+          name="notes"
+          formControlName="notes"
+          class="
+            w-full
+            bg-gray-50
+            text-gray-800
+            border
+            focus:ring
+            rounded
+            outline-none
+            transition
+            duration-100
+            px-3
+            py-2
+          "
+        />
+      </div>
+
+      <div class="sm:col-span-2 mt-2 flex justify-between items-center">
+        <button
+          type="submit"
+          [disabled]="customerForm.invalid"
+          class="
+            inline-block
+            bg-blue-100
+            border border-primary
+            focus-visible:ring
+            text-primary text-sm
+            disabled:bg-gray-300 disabled:text-gray-500
+            md:text-base
+            font-semibold
+            text-center
+            rounded
+            outline-none
+            transition
+            duration-100
+            px-10
+            py-1.5
+          "
+        >
+          Add
+        </button>
+
+        <span class="text-gray-500 text-sm">*Required</span>
+      </div>
+
+      <p class="text-gray-400 text-xs">
+        <!-- By signing up to our newsletter you agree to our -->
+        <!-- <a href="#" class="hover:text-indigo-500 active:text-indigo-600 underline transition duration-100"
+          >Privacy Policy</a
+        >. -->
+      </p>
+    </form>
+    <!-- form - end -->
+  </div>
+</div>

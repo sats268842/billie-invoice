@@ -1,0 +1,56 @@
+$colors: (
+  primary: (
+    primaryblue: #140f7b,
+    darkorange: #e34a2b,
+    secondaryblue: #3f369b,
+    accent: #d29a4a,
+    error: #ff8080,
+    success: #4ca450,
+    greyint: #eeeeee,
+    greydisabled: #d7d7d7,
+    textgrey: #4c4544,
+    altaccent: #f18989,
+    altaccentdark: #c37777,
+    lightwhite: #f9f9fb,
+  ),
+  secondary: (
+    textblue: #3a4557,
+    allblack: #121212,
+    tagyellow: #dfa754,
+    salemgreen: #0bb451,
+    pastelgreen: #109e4b,
+    lowopalccent: #4d3838,
+    accentlowop: #d3ac5e,
+    successgreenlowop: #4caf50,
+    taggreen: #4cb176,
+  ),
+);
+// Headers
+$text-styles: (
+  'sizes': (
+    'heading-1': 88px,
+    'heading-2': 57px,
+    'heading-3': 48px,
+    'heading-4': 34px,
+    'heading-5': 23px,
+    'heading-6': 20px,
+    'subtitle-1': 15px,
+    'subtitle-2': 14px,
+    'body-1': 16px,
+    'body-2': 14px,
+    'button': 14px,
+    'caption': 12px,
+    'overline': 12px,
+  ),
+  'fonts': (
+    'headings-font-family': unquote("'Poppins', sans-serif"),
+    'subtitle-font-family': unquote("'Roboto'"),
+    'body-font-family': unquote("'Roboto'"),
+    'caption-font-family': unquote("'Roboto'"),
+  ),
+  'font-weights': (
+    'regular': 400,
+    'medium': 500,
+    'bold': 700,
+  ),
+);

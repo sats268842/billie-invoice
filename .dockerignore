@@ -1,0 +1,7 @@
+# .git
+# .gitignore
+# .env*
+# .github
+# node_modules
+# nginx-conf
+# docker-compose*.yml

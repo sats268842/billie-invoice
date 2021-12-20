@@ -1,0 +1,333 @@
+<section>
+  <div class="relative items-center w-full mx-auto py-10 md:px-12 lg:px-16 max-w-7xl">
+    <div class="justify-center flex mx-auto">
+      <ng-container *ngFor="let plan of plans">
+        <div
+          class="bg-gray-50 md:w-1/4 w-3/4 rounded-xl transition duration-500 ease-in-out"
+          [ngClass]="
+            plan.id === selectedPlan?.id || plan?.planDetails.id === subscriptions?.plan?.id
+              ? 'bg-blue-100 scale-105'
+              : 'scale-95'
+          "
+        >
+          <svg
+            *ngIf="plan?.planDetails.id === subscriptions?.plan?.id"
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6 absolute ml-2 mt-2"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="blue"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+          <svg
+            *ngIf="plan.id === selectedPlan?.id"
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6 absolute ml-2 mt-2"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="blue"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+          <div class="p-6 text-center">
+            <h2 class="text-lg font-medium leading-6 text-neutral-600">{{ plan?.name }}</h2>
+            <p class="mt-8 text-4xl">
+              <span class="font-black text-black md:text-2xl text-base uppercase">
+                {{ plan?.planDetails?.amount / 100 }}</span
+              >
+              <span class="font-medium md:text-base text-xs text-gray-500">/{{ plan?.planDetails?.interval }}</span>
+            </p>
+            <!-- <span class="text-xs text-neutral-600">No credit card required</span> -->
+            <div class="mt-6">
+              <button
+                [disabled]="plan?.planDetails.id !== subscriptions?.plan?.id && subscriptions"
+                (click)="onPlanSelect(plan)"
+                class="
+                  flex
+                  items-center
+                  justify-center
+                  font-semibold
+                  w-full
+                  px-5
+                  py-2
+                  border border-primary
+                  text-xs
+                  md:text-base
+                  text-center
+                  transition
+                  duration-500
+                  ease-in-out
+                  transform
+                  text-primary
+                  bg-blue-100
+                  rounded
+                  hover:bg-blue-500 hover:text-white
+                  disabled:bg-gray-100 disabled:text-gray-700
+                  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500
+                "
+              >
+                <span *ngIf="subscriptions">
+                  {{ plan?.planDetails.id === subscriptions?.plan?.id ? 'Cancel Subscripition' : 'Select' }}
+                </span>
+                <span *ngIf="!subscriptions">
+                  {{ selectedPlan?.id === plan?.id ? 'Selected' : 'Select' }}
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+    <div class="flex justify-center py-12">
+      <mat-form-field class="md:w-2/4 w-full" appearance="outline">
+        <mat-label>Select Payment Method</mat-label>
+        <mat-select name="paymentMethod" (selectionChange)="onPaymentMethodChange($event.value)">
+          <mat-option *ngFor="let paymentMethod of paymentMethods" [value]="paymentMethod">
+            <div class="flex m-2 items-center flex-row gap-2">
+              <img
+                class="w-7 md:w-8 m-2"
+                *ngIf="paymentMethod.card.brand === 'mastercard'"
+                src="../../../../assets/icons/mastercard.png"
+                alt=""
+              />
+              <img
+                class="w-7 md:w-8 m-2"
+                *ngIf="paymentMethod.card.brand === 'visa'"
+                src="../../../assets/icons/visa.png"
+                alt=""
+              />
+              <img
+                class="w-7 md:w-8 m-2"
+                *ngIf="paymentMethod.card.brand === 'amex'"
+                src="../../../assets/icons/card.png"
+                alt=""
+              />
+
+              <p>{{ paymentMethod?.card.last4 }}</p>
+            </div>
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <button
+        [disabled]="selectedPlan === undefined"
+        (click)="pay()"
+        class="
+          px-2
+          w-36
+          rounded
+          text-sm
+          block
+          mx-auto
+          mt-10
+          py-2
+          bg-blue-50
+          text-blue-500
+          font-semibold
+          disabled:bg-gray-400 disabled:text-gray-700
+        "
+      >
+        Pay
+      </button>
+    </div>
+
+    <!-- <div class="max-w-2xl px-4 py-24 mx-auto sm:px-6 lg:px-8">
+      <div
+        class="
+          justify-center
+          mx-auto
+          space-y-4
+          sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-6
+          lg:mx-auto
+          xl:max-w-2xl xl:mx-0 xl:grid-cols-2
+        "
+      >
+        <ng-container *ngFor="let plan of plans">
+          <div
+            class="bg-gray-50 rounded-xl transition duration-500 ease-in-out"
+            [ngClass]="
+              plan.id === selectedPlan?.id || plan?.planDetails.id === subscriptions?.plan?.id
+                ? 'bg-blue-100 scale-105'
+                : 'scale-95'
+            "
+          >
+            <svg
+              *ngIf="plan?.planDetails.id === subscriptions?.plan?.id"
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6 absolute ml-2 mt-2"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="blue"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+            <svg
+              *ngIf="plan.id === selectedPlan?.id"
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6 absolute ml-2 mt-2"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="blue"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+            <div class="p-6 text-center">
+              <h2 class="text-lg font-medium leading-6 text-neutral-600">{{ plan?.name }}</h2>
+              <p class="mt-8 text-4xl">
+                <span class="font-black text-black uppercase"> {{ plan?.planDetails?.amount / 100 }}</span>
+                <span class="font-medium text-gray-300">/{{ plan?.planDetails?.interval }}</span>
+              </p>
+              <span class="text-xs text-neutral-600">No credit card required</span>
+              <div class="mt-6">
+                <button
+                  [disabled]="plan?.planDetails.id !== subscriptions?.plan?.id && subscriptions"
+                  (click)="onPlanSelect(plan)"
+                  class="
+                    flex
+                    items-center
+                    justify-center
+                    font-semibold
+                    w-full
+                    px-5
+                    py-2
+                    border border-primary
+                    text-base text-center
+                    transition
+                    duration-500
+                    ease-in-out
+                    transform
+                    text-primary
+                    bg-blue-100
+                    rounded
+                    hover:bg-blue-500 hover:text-white
+                    disabled:bg-gray-100 disabled:text-gray-700
+                    focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500
+                  "
+                >
+                  <span *ngIf="subscriptions">
+                    {{ plan?.planDetails.id === subscriptions?.plan?.id ? 'Cancel Subscripition' : 'Select' }}
+                  </span>
+                  <span *ngIf="!subscriptions">
+                    {{ selectedPlan?.id === plan?.id ? 'Selected' : 'Select' }}
+                  </span>
+
+                 
+                </button>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div> -->
+    <!-- <ng-container *ngIf="selectedPlan !== undefined">
+        <h4 class="mt-5">Payment Methods</h4>
+        <ng-container *ngFor="let method of paymentMethods">
+          <div
+            (click)="onSelectCard(method)"
+            [ngClass]="method.id === selectedCard?.id ? 'bg-blue-100' : ''"
+            class="mt-2 flex p-2 flex-wrap cursor-pointer xl:-mx-3"
+          >
+            <div class="flex justify-center items-center xl:my-3 xl:px-3 w-1/6">
+              <span class="bg-white rounded shadow p-2">
+                <img class="w-4 md:w-8" src="../../../../assets/icons/mastercard.png" alt="" />
+              </span>
+            </div>
+
+            <div class="my-3 hidden md:block px-3 xl:my-3 xl:px-3 w-2/6">
+              <h6 class="text-sm font-semibold text-gray-700">{{ method.card.funding + ' ' + 'Card' | titlecase }}</h6>
+              <p class="text-xs text-gray-500 font-medium">{{ method?.card.brand | titlecase }}</p>
+            </div>
+
+            <div class="my-3 px-3 xl:my-3 xl:px-3 w-3/6 md:w-2/6">
+              <h6 class="text-sm font-semibold text-gray-700">Last digits: {{ method?.card.last4 }}</h6>
+              <p class="text-xs text-gray-500 font-medium">Expiry Year: {{ method?.card.exp_year }}</p>
+            </div>
+
+            <div class="my-3 px-3 xl:my-3 xl:px-3 w-1/6">
+              <div
+                (click)="deletePaymentMethod(method?.id)"
+                class="cursor-pointer p-2 w-8 shadow rounded-lg mx-auto bg-white"
+              >
+                <img class="w-6 block" src="../../../assets/icons/delete.png" alt="" />
+              </div>
+            </div>
+          </div>
+        </ng-container> -->
+    <!-- </ng-container> -->
+    <!-- <div class="w-full mt-10" *ngIf="selectedPlan !== undefined">
+        <ngx-stripe-card
+          class="stripe transition duration-500 ease-in-out"
+          [options]="cardOptions"
+          [elementsOptions]="elementsOptions"
+        ></ngx-stripe-card>
+        <p *ngIf="error" class="mt-4 text-xs transition duration-500 ease-in-out text-red-500">
+          {{ errorMessage }}
+        </p>
+
+        <button
+          [disabled]="selectedPlan === undefined"
+          (click)="createPaymentMethod()"
+          class="
+            px-2
+            w-36
+            rounded
+            text-sm
+            block
+            ml-auto
+            mt-10
+            py-2
+            bg-red-50
+            text-red-500
+            font-semibold
+            disabled:bg-gray-400 disabled:text-gray-700
+          "
+        >
+          Add Card
+        </button>
+
+        <button
+          [disabled]="selectedPlan === undefined"
+          (click)="pay()"
+          class="
+            px-2
+            w-36
+            rounded
+            text-sm
+            block
+            mx-auto
+            mt-10
+            py-2
+            bg-blue-50
+            text-blue-500
+            font-semibold
+            disabled:bg-gray-400 disabled:text-gray-700
+          "
+        >
+          Pay
+        </button>
+      </div> -->
+    <!-- </div> -->
+  </div>
+</section>
